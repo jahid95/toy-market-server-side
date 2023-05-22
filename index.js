@@ -45,7 +45,7 @@ async function run() {
 
         const options = {
             // Include only the `title` and `imdb` fields in the returned document
-            projection: { name: 1, price: 1, image:1,},
+            projection: { name: 1, price: 1, image:1, rating:1, catagory:1, storeQty:1,seller:1},
         };
 
         const result = await carCollection.findOne(query, options);
