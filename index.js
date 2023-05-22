@@ -52,7 +52,7 @@ async function run() {
         res.send(result);
     })
 
-
+ //create db from client read and write operation
     app.get('/toys', async (req, res) => {
             console.log(req.query.email);
             let query = {};
@@ -78,6 +78,20 @@ async function run() {
       const result = await toyCollection.deleteOne(query);
       res.send(result);
   })
+
+  //update operation
+  app.patch('/toys/:id', async (req, res) => {
+    const id = req.params.id;
+    const filter = { _id: new ObjectId(id) };
+    const updateToy = req.body;    
+    const updateStatus = {
+        $set: {
+            status: updateToy.status
+        },
+    };
+    const result = await toyCollection.updateOne(filter, updateStatus);
+    res.send(result);
+})
 
 
     // Send a ping to confirm a successful connection
